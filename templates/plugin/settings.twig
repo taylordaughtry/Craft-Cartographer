@@ -1,0 +1,11 @@
+{% import '_includes/forms' as forms %}
+
+{{ forms.textField({
+	label: 'Google Geocoding API Key'|t,
+	instructions: 'Used to convert an address into its lat/lng equivalent.'|t,
+	name: 'apiKey',
+	id: 'apiKey',
+	value: settings.apiKey,
+	errors: settings.getErrors('apiKey'),
+	required: true
+}) }}
