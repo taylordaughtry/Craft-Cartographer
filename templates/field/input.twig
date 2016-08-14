@@ -1,0 +1,9 @@
+<div class="cartographer__map"></div>
+
+{# TODO: Couldn't I just save these values as a stringified object in one input, since it's going to be decoded? #}
+
+<input type="hidden" name="{{ name }}[lat]" value="{{ value is not null and value.lat is defined ? value.lat }}" id="{{ id }}-lat">
+<input type="hidden" name="{{ name }}[lng]" value="{{ value is not null and value.lng is defined ? value.lng }}" id="{{ id }}-lng">
+<input type="hidden" name="{{ name }}[zoom]" value="{{ value is not null and value.zoom is defined ? value.zoom }}" id="{{ id }}-zoom">
+<input type="hidden" name="{{ name }}[address]" value="{{ value is not null and value.address is defined ? value.address }}" id="{{ id }}-address">
+<input type="hidden" name="{{ name }}[components]" value="{{ value is not null and value.address is defined ? value.address }}" id="{{ id }}-address">
