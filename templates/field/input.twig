@@ -23,4 +23,4 @@
 <input type="hidden" name="{{ name }}[lng]" value="{{ value is not null and value.lng is defined ? value.lng }}" id="lng">
 <input type="hidden" name="{{ name }}[zoom]" value="{{ settings is not null and settings.zoom is defined ? settings.zoom }}" id="zoom">
 <input type="hidden" name="{{ name }}[address]" value="{{ value is not null and value.address is defined ? value.address }}" id="address">
-<input type="hidden" name="{{ name }}[parts]" value="{{ value is not null and value.parts is defined ? value.parts }}" id="parts">
+<input type="hidden" name="{{ name }}[parts]" value="{{ value is not null and value.parts is defined ? value.parts|json_encode }}" id="parts">
