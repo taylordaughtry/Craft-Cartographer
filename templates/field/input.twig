@@ -3,25 +3,24 @@
 <div class="cartographer__input-wrapper">
 	<div class="cartographer__input-block">
 		<p class="cartographer__instructions">Address</p>
-		<input type="text" name="address-input" class="text fullwidth cartographer__address-input">
+		<input type="text" name="address-input" class="text fullwidth cartographer__address-input" value="{{ value is not null and value.address is defined ? value.address }}">
 		<span class="btn search icon cartographer__submit">Search</span>
 	</div>
 
 	<div class="cartographer__input-block -third">
 		<p class="cartographer__instructions">Latitude</p>
-		<input type="text" name="lat-input" class="text fullwidth">
+		<input type="text" name="lat-input" class="text fullwidth" value="{{ value is not null and value.lat is defined ? value.lat }}">
 	</div>
 
 	<div class="cartographer__input-block -third">
 		<p class="cartographer__instructions">Longitude</p>
-		<input type="text" name="lng-input" class="text fullwidth">
+		<input type="text" name="lng-input" class="text fullwidth" value="{{ value is not null and value.lng is defined ? value.lng }}">
 	</div>
 </div>
 
 {# TODO: Couldn't I just save these values as a stringified object in one input, since it's going to be decoded? #}
-
 <input type="hidden" name="{{ name }}[lat]" value="{{ value is not null and value.lat is defined ? value.lat }}" id="lat">
 <input type="hidden" name="{{ name }}[lng]" value="{{ value is not null and value.lng is defined ? value.lng }}" id="lng">
-<input type="hidden" name="{{ name }}[zoom]" value="{{ value is not null and value.zoom is defined ? value.zoom }}" id="zoom">
+<input type="hidden" name="{{ name }}[zoom]" value="{{ settings is not null and settings.zoom is defined ? settings.zoom }}" id="zoom">
 <input type="hidden" name="{{ name }}[address]" value="{{ value is not null and value.address is defined ? value.address }}" id="address">
-<input type="hidden" name="{{ name }}[components]" value="{{ value is not null and value.address is defined ? value.address }}" id="components">
+<input type="hidden" name="{{ name }}[parts]" value="{{ value is not null and value.parts is defined ? value.parts }}" id="parts">

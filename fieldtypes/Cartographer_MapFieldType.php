@@ -16,6 +16,7 @@ class Cartographer_MapFieldType extends BaseFieldType
     public function getInputHtml($name, $value)
     {
         $settings = $this->getSettings()->attributes;
+        $model = json_encode($value->attributes);
 
         $settings['apiKey'] = craft()->plugins->getPlugin('cartographer')->getSettings()->apiKey;
         $settings['height'] = $settings['height'] ?: '250';
@@ -26,7 +27,7 @@ class Cartographer_MapFieldType extends BaseFieldType
 
         craft()->templates->includeJsResource('cartographer/leaflet/leaflet.js');
         craft()->templates->includeJsResource('cartographer/cartographer.js');
-        craft()->templates->includeJs("new Cartographer.init('" . json_encode($settings) . "');");
+        craft()->templates->includeJs("new Cartographer.init('" . json_encode($settings) . "', '" . $model . "');");
 
         return craft()->templates->render('cartographer/field/input', array(
             'name' => $name,
@@ -40,6 +41,11 @@ class Cartographer_MapFieldType extends BaseFieldType
         return craft()->templates->render('cartographer/field/settings', array(
             'settings' => $this->getSettings()
         ));
+    }
+
+    public function prepValue($value)
+    {
+        return craft()->cartographer->buildMap($value);
     }
 
     protected function defineSettings()

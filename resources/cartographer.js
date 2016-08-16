@@ -32,13 +32,18 @@ var Cartographer = (function() {
 					lat: result.geometry.location.lat,
 					lng: result.geometry.location.lng,
 					address: result.formatted_address,
-					components: result.address_components
+					parts: result.address_components
 				};
 
 			// TODO: Fill in these with some sort of loop based on the keys you save on the object above
 			_find('input[name*="address-input"]').value = obj.address;
 			_find('input[name*="lat-input"]').value = obj.lat;
 			_find('input[name*="lng-input"]').value = obj.lng;
+
+			_find('#fields-lat').value = obj.lat;
+			_find('#fields-lng').value = obj.lng;
+			_find('#fields-address').value = obj.address;
+			_find('#fields-parts').value = JSON.stringify(obj.parts);
 
 			addMarker([obj.lat, obj.lng]);
 		}
@@ -64,19 +69,26 @@ var Cartographer = (function() {
 		input.addEventListener('click', _sendRequest);
 	};
 
-	function init(settings) {
-		options = JSON.parse(settings);
-
-		_renderMap();
-
-		_bind();
-	};
-
 	function addMarker(coords) {
 		L.marker(coords).addTo(map);
 
 		map.setView(coords);
-	}
+	};
+
+	function init(settings, value) {
+		options = JSON.parse(settings),
+		currentValues = JSON.parse(value);
+
+		_renderMap();
+
+		if (currentValues.hasOwnProperty('lat') && currentValues.lat != '') {
+			_ready(function() {
+				addMarker([currentValues.lat, currentValues.lng]);
+			});
+		}
+
+		_bind();
+	};
 
 	return {
 		init: init,
