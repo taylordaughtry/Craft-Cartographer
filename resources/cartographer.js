@@ -81,7 +81,7 @@ var Cartographer = (function() {
 
 		_renderMap();
 
-		if (currentValues.hasOwnProperty('lat') && currentValues.lat != '') {
+		if (currentValues.hasOwnProperty('lat') && currentValues.lat) {
 			_ready(function() {
 				addMarker([currentValues.lat, currentValues.lng]);
 			});
